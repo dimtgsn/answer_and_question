@@ -3,72 +3,35 @@
     <header class="header">
       <div class="container header_container">
         <h1 class="header_title">Answers on Questions</h1>
-        <div class="add_question">
-          <h2 class="add_question_title">
-            <svg fill="#4A3AFF" width="1rem" height="1rem" viewBox="0 0 45.402 45.402" xml:space="preserve">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <g>
-                  <path d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141 c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27 c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435 c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z">
-                  </path>
-                </g>
-              </g>
-              </svg>
-          </h2>
-        </div>
+        <router-link :to="this.$route.fullPath !== '/admin-panel' ? '/admin-panel' : '/'" >
+          <div class="add_question">
+            <h2 class="add_question_title">
+              <!--            <svg fill="#4A3AFF" width="1rem" height="1rem" viewBox="0 0 45.402 45.402" xml:space="preserve">-->
+              <!--              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>-->
+              <!--              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>-->
+              <!--              <g id="SVGRepo_iconCarrier">-->
+              <!--                <g>-->
+              <!--                  <path d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141 c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27 c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435 c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z">-->
+              <!--                  </path>-->
+              <!--                </g>-->
+              <!--              </g>-->
+              <!--              </svg>-->
+              {{ this.$route.fullPath !== "/admin-panel" ? "Admin Panel" : "Home" }}
+            </h2>
+          </div>
+        </router-link>
       </div>
     </header>
     <main class="main">
-      <section class="section-questions">
-        <div class="question" ref="question" @click="openQuestion(question[id])" v-for="(q, id) in testQuestionsArr" :key="id">
-          <QuestionAnswer />
-        </div>
-      </section>
+     <router-view />
     </main>
   </div>
 </template>
 
 <script setup>
-import QuestionAnswer from "./components/QuestionAnswer.vue";
-import {ref} from "vue";
-
-const question = ref(null);
-
-const openQuestion = (question) => {
-  const answer = question.querySelector("#answer");
-  const arrowSvg = question.querySelector(".arrow_svg");
-  const arrowBtn = question.querySelector(".arrow_btn");
-  const questionBody = question.querySelector(".question_body");
-  arrowSvg.classList.toggle("arrow_svg__active");
-  arrowBtn.classList.toggle("arrow_btn__active");
-  questionBody.classList.toggle("question_body__active");
-  answer.classList.toggle("question_answer__active");
-};
-
-const testQuestionsArr = [
-  {
-    "id": 1,
-    "title": "Lafc gaefea eafea ae ne4in2 p"
-  },
-  {
-    "id": 2,
-    "title": "iln ipNP IN LINIP No Lafc gaefea eafea ae ne4in2 p"
-  },
-  {
-    "id": 3,
-    "title": "SV inl lihpiH 80Y Lafc gaefea eafea ae ne4in2 p"
-  },
-]
 </script>
 
 <style scoped>
-.q{
-  display: none;
-}
-.question_active{
-  display: flex;
-}
 .header_container{
   display: flex;
   justify-content: space-between;
@@ -99,23 +62,8 @@ const testQuestionsArr = [
 }
 
 .add_question_title{
-  /*font-size: 1rem;*/
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.125rem;
-}
-
-.section-questions{
-  width: 100%;
-}
-.question{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1.8rem;
-  transition: all .3s ease;
-}
-.question:last-child{
-  margin-bottom: 0;
 }
 </style>

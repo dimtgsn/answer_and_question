@@ -2,8 +2,8 @@
   <div class="question_body">
     <div class="container question_container">
       <div class="question_content">
-        <h2 class="question_title">Lorem ipsum dolor sit amet, consectetur adipisicing elitsimilique?</h2>
-        <p id="answer" class="question_answer">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eveniet fuga fugiat, numquam officiis omnis sint totam. Alias consequatur deleniti nisi nostrum officia qui quisquam sint tempora totam ut? Adipisci aspernatur atque corporis cum debitis deleniti ea eos eveniet, fugiat magnam modi molestias neque quia recusandae reprehenderit? Dicta illum laudantium maxime nostrum repellat? Architecto commodi consectetur cum dignissimos dolor dolorem dolorum earum error exercitationem illo ipsum iste iusto labore laudantium maxime molestias non nulla obcaecati officia perspiciatis quibusdam quod repellat repellendus sapiente similique suscipit, voluptas voluptatibus! At aut, cum eius eveniet fuga ipsum, iste magni obcaecati quas quo repellat totam.</p>
+        <h2 class="question_title">{{ props.title }}</h2>
+        <p id="answer" class="question_answer">{{ props.answer ?? "Unfortunately, there isn't answer to this question yet." }}</p>
       </div>
       <div class="question_arrow">
         <QuestionArrow />
@@ -14,6 +14,11 @@
 
 <script setup>
 import QuestionArrow from "./QuestionArrow.vue";
+
+const props = defineProps({
+  title: String,
+  answer: String,
+})
 </script>
 
 <style scoped>
