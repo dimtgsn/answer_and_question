@@ -122,7 +122,6 @@ body {
     line-height: 1.5;
     font-family: 'Inter', sans-serif;
     color: var(--main-text-color, #170F49);
-    /*background-color: #F4F2F0;*/
     background-color: var(--main-bg-color, #F7F7FB);
 }
 html{
@@ -166,6 +165,9 @@ main {
 @media (max-width: 768px) {
     html{
         font-size: 14px;
+    }
+    .container{
+        padding: 0 2rem;
     }
 }
 

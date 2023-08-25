@@ -19,6 +19,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::delete('/question/{question}', [QuestionController::class, "destroy"])->name("api.question.destroy");
-Route::post('/question', [QuestionController::class, "create"])->name("question.create");
-Route::patch('/question/{question}', [QuestionController::class, "update"])->name("question.update");

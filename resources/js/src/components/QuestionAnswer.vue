@@ -1,5 +1,5 @@
 <template>
-  <div class="question_body">
+  <div class="question_body" :style="`padding: ${topIndent}px 0 ${bottomIndent}px 0`">
     <div class="container question_container">
       <div class="question_content">
         <h2 class="question_title">{{ props.title }}</h2>
@@ -14,6 +14,12 @@
 
 <script setup>
 import QuestionArrow from "./QuestionArrow.vue";
+import { useQuestionModuleStore } from "../stores/QuestionModuleStore.js";
+
+const topIndent = useQuestionModuleStore().getTopIndent().value !== "" ?
+                  parseInt(useQuestionModuleStore().getTopIndent().value) : 47
+const bottomIndent = useQuestionModuleStore().getBottomIndent().value !== "" ?
+                     parseInt(useQuestionModuleStore().getBottomIndent().value) : 47
 
 const props = defineProps({
   title: String,
@@ -22,20 +28,13 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.question-section{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .question_body{
-  width: 85%;
+  width: 88%;
   cursor: pointer;
   border-radius: 1.125rem;
   background: #ffffff;
   border: 2px solid transparent;
   box-shadow: 0 5px 16px 0 rgba(8, 15, 52, 0.06);
-  padding: 2.9rem 0;
   transition: all .3s linear;
 }
 .question_body__active{

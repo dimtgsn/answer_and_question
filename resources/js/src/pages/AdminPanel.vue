@@ -9,6 +9,9 @@
       <div v-if="contentBlock">
         <AdminPanelContent />
       </div>
+      <div v-if="designBlock">
+        <AdminPanelDesign @backToContentBlock="changeAdminTitle('contentBlock')"/>
+      </div>
     </div>
   </section>
 </template>
@@ -16,6 +19,7 @@
 <script setup>
 import { ref } from "vue";
 import AdminPanelContent from "../components/AdminPanelContent.vue";
+import AdminPanelDesign from "../components/AdminPanelDesign.vue";
 
 const contentBlock = ref(true)
 const designBlock = ref(false)
@@ -67,5 +71,11 @@ const changeAdminTitle = (changeBlock) => {
   margin: .5rem 0 1rem 0;
   width: 100%;
   background: var(--question-body-color);
+}
+
+@media (max-width: 768px) {
+  .admin-section{
+    width: 100%;
+  }
 }
 </style>

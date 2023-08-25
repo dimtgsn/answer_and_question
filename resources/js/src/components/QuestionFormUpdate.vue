@@ -45,13 +45,12 @@
           </div>
         </div>
       </form>
-
     </section>
   </div>
 </template>
 
 <script setup>
-import {computed, onBeforeUpdate, onMounted, reactive, ref} from "vue";
+import {computed, onBeforeUpdate, reactive, ref} from "vue";
 import {helpers, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import axios from "axios";
@@ -89,7 +88,7 @@ const v$ = useVuelidate(rules, formData);
 const updateQuestionError = ref('');
 
 const updateQuestion = () => {
-  axios(`/api/question/${props.question_id}`, {
+  axios(`/question/${props.question_id}`, {
     method: 'PATCH',
     headers: {
       'content-type': 'application/json',
@@ -98,9 +97,8 @@ const updateQuestion = () => {
       title: formData.question,
       answer: formData.answer,
     },
-  }).then((res) => {
-    console.log(res)
-  }).catch((err) => {
+  }).then(() => {}).catch((err) => {
+    updateQuestionError.value = "Server internal error. Check the correctness of the data and try again"
     console.error(err)
   }).finally(() => {
     emits("updateListQuestions")
@@ -119,15 +117,8 @@ const updateQuestion = () => {
   z-index: 99;
   margin-top: 2rem;
 }
-.form_title{
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 110%;
-  color: #1A1A25;
-  margin-bottom: 1.5rem;
-}
 .form-input_wrapp{
-  width: 30rem;
+  width: 100%;
   height: 3rem;
   background: #ffffff;
   border: 1px solid rgba(133, 143, 164, 0.5);
@@ -142,7 +133,6 @@ const updateQuestion = () => {
 .form-input_wrapp:hover {
   border: 1px solid rgba(133, 143, 164, 1);
 }
-
 .form_input{
   font-weight: 400;
   font-size: 1rem;
@@ -162,7 +152,6 @@ const updateQuestion = () => {
   line-height: 140%;
   color: #858FA4;
 }
-
 .error_message{
   font-weight: 500;
   font-size: .875rem;
@@ -176,7 +165,6 @@ const updateQuestion = () => {
 .input-invalid{
   background: #FFFFFF;
 }
-
 .message_error{
   color: #E31235;
   font-size: 1rem;
@@ -185,7 +173,8 @@ const updateQuestion = () => {
 .send-form{
   margin: 2rem 0 0 1rem;
 }
-.send-form-btn{
+.send-form-btn,
+.send-form-btn__disabled{
   width: 9rem;
   height: 3rem;
   display: flex;
@@ -203,23 +192,7 @@ const updateQuestion = () => {
   transition: all .3s ease;
 }
 .send-form-btn__disabled{
-  width: 9rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  border-radius: 10px;
-  background: #170F49;
   opacity: .2;
-}
-
-.form_label{
-  padding-bottom: .3175rem;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 150%;
-  color: #384255;
 }
 .form-message {
   min-height: 100%;
@@ -227,21 +200,19 @@ const updateQuestion = () => {
   border: 1px solid rgba(133, 143, 164, .5);
   background: #ffffff;
 }
-
 .form-message:focus-within{
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
   border-color: #66afe9;
   background: #FFFFFF;
   outline: none;
 }
-
 .form-message:hover {
   border: 1px solid rgba(133, 143, 164, 1);
 }
-
 .form-textarea-sm{
   min-height: 5rem;
-  min-width: 30rem;
+  min-width: 100%;
+  max-width: 100%;
 }
 .send-form,
 .link-back{

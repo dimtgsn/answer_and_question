@@ -22,3 +22,6 @@ Route::get('/admin-panel', function () {
     return view('app');
 });
 Route::get('/questions', [QuestionController::class, "getAllQuestions"])->name("question.getAllQuestions");
+Route::post('/question', [QuestionController::class, "create"])->name("question.create");
+Route::patch('/question/{question}', [QuestionController::class, "update"])->name("question.update");
+Route::delete('/question/{question}', [QuestionController::class, "destroy"])->name("api.question.destroy");

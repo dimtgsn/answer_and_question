@@ -40,7 +40,6 @@
           </div>
         </div>
       </form>
-
     </section>
   </div>
 </template>
@@ -68,7 +67,7 @@ const v$ = useVuelidate(rules, formData);
 const createQuestionError = ref('');
 
 const createQuestion = () => {
-  axios(`/api/question`, {
+  axios(`/question`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -77,12 +76,9 @@ const createQuestion = () => {
       title: formData.question,
       answer: formData.answer,
     },
-  }).then((res) => {
-    // getQuestions()
-    formData.answer = ""
-    console.log(res)
-  }).catch((err) => {
-    console.error(err)
+  }).then(() => {}).catch((err) => {
+      createQuestionError.value = "Server internal error. Check the correctness of the data and try again"
+      console.error(err)
   }).finally(() => {
     emits("updateListQuestions")
   })
@@ -100,15 +96,8 @@ const createQuestion = () => {
   z-index: 99;
   margin-top: 2rem;
 }
-.form_title{
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 110%;
-  color: #1A1A25;
-  margin-bottom: 1.5rem;
-}
 .form-input_wrapp{
-  width: 30rem;
+  width: 100%;
   height: 3rem;
   background: #ffffff;
   border: 1px solid rgba(133, 143, 164, 0.5);
@@ -123,7 +112,6 @@ const createQuestion = () => {
 .form-input_wrapp:hover {
   border: 1px solid rgba(133, 143, 164, 1);
 }
-
 .form_input{
   font-weight: 400;
   font-size: 1rem;
@@ -143,7 +131,6 @@ const createQuestion = () => {
   line-height: 140%;
   color: #858FA4;
 }
-
 .error_message{
   font-weight: 500;
   font-size: .875rem;
@@ -157,7 +144,6 @@ const createQuestion = () => {
 .input-invalid{
   background: #FFFFFF;
 }
-
 .message_error{
   color: #E31235;
   font-size: 1rem;
@@ -166,7 +152,8 @@ const createQuestion = () => {
 .send-form{
   margin-top: 2rem;
 }
-.send-form-btn{
+.send-form-btn,
+.send-form-btn__disabled{
   width: 9rem;
   height: 3rem;
   display: flex;
@@ -184,26 +171,9 @@ const createQuestion = () => {
   transition: all .3s ease;
 }
 .send-form-btn__disabled{
-  width: 9rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  border-radius: 10px;
-  background: #170F49;
   opacity: .2;
 }
-
-.form_label{
-  padding-bottom: .3175rem;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 150%;
-  color: #384255;
-}
 .form-message {
-  min-height: 100%;
   transition: all .3s ease;
   border: 1px solid rgba(133, 143, 164, .5);
   background: #ffffff;
@@ -211,7 +181,6 @@ const createQuestion = () => {
 .form-message:hover {
   border: 1px solid rgba(133, 143, 164, 1);
 }
-
 .form-message:focus-within{
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
   border-color: #66afe9;
@@ -220,6 +189,7 @@ const createQuestion = () => {
 }
 .form-textarea-sm{
   min-height: 5rem;
-  min-width: 30rem;
+  min-width: 100%;
+  max-width: 100%;
 }
 </style>
