@@ -8,5 +8,7 @@
 - Vue 3
 - Vue Router
 - Pinia
+- Postgresql
+- Nginx
 
 
